@@ -1,4 +1,5 @@
 import modules.scripts as scripts
+import modules.extra_networks as extra_networks
 import gradio as gr
 
 class GenarationConfigPrompt(scripts.Script):  
@@ -23,7 +24,7 @@ class GenarationConfigPrompt(scripts.Script):
         return [trigger]
     
     def before_process_batch(self, p, trigger, *args, **kwargs):
-        extra = p.parse_extra_network_prompts()
+        _, extra = extra_networks.parse_prompts([prompt.copy() for prompt in p.prompts])
         configs = extra.get(trigger)
         
         if (configs is None):
