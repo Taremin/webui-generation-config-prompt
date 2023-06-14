@@ -24,7 +24,7 @@ class GenarationConfigPrompt(scripts.Script):
         return [trigger]
     
     def before_process_batch(self, p, trigger, *args, **kwargs):
-        _, extra = extra_networks.parse_prompts([prompt.copy() for prompt in p.prompts])
+        _, extra = extra_networks.parse_prompts([prompt + '' for prompt in p.prompts])
         configs = extra.get(trigger)
         
         if (configs is None):
